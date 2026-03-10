@@ -5,6 +5,7 @@ import '../../../../core/session/session_store.dart';
 import '../../../../core/widgets/chamba_widgets.dart';
 import '../../../shell/presentation/screens/main_shell_screen.dart';
 import '../controllers/auth_controller.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({required this.role, super.key});
@@ -35,9 +36,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (next.errorMessage != null &&
           next.errorMessage!.isNotEmpty &&
           previous?.errorMessage != next.errorMessage) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.errorMessage!)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.errorMessage!)));
       }
 
       if (next.isAuthenticated && previous?.isAuthenticated != true) {
@@ -104,14 +105,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         const SizedBox(height: 18),
                         ChambaPrimaryButton(
-                          label: authState.isLoading ? 'Ingresando...' : 'Entrar',
+                          label: authState.isLoading
+                              ? 'Ingresando...'
+                              : 'Entrar',
                           onPressed: authState.isLoading
                               ? null
                               : () async {
                                   if (!_formKey.currentState!.validate()) {
                                     return;
                                   }
-                                  await ref.read(authControllerProvider.notifier).login(
+                                  await ref
+                                      .read(authControllerProvider.notifier)
+                                      .login(
                                         email: _emailController.text,
                                         password: _passwordController.text,
                                       );
@@ -121,6 +126,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
                           child: const Text('Volver'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) =>
+                                    RegisterScreen(role: widget.role),
+                              ),
+                            );
+                          },
+                          child: const Text('Crear cuenta'),
                         ),
                       ],
                     ),
