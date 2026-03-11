@@ -25,8 +25,8 @@ cp .env.example .env
 3. Run backend:
 
 ```bash
-npm install
-npm run start:dev
+pnpm install
+pnpm start:dev
 ```
 
 API base URL: `http://localhost:3000/api`
