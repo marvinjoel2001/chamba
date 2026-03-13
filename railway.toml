@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 # Eliminamos el --prefix porque el Root Directory ya es 'backend'
 # Agregamos la instalación de dependencias de desarrollo para tener el comando 'nest'
-buildCommand = "npm install --include=dev && npm run build"
+buildCommand = "npm ci --include=dev && npm run build"
 
 [deploy]
 # Comando directo para ejecutar el build de NestJS

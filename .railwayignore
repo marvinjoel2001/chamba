@@ -1,0 +1,6 @@
+backend/node_modules
+backend/.npm-cache
+backend/dist
+mobile/build
+mobile/.dart_tool
+**/node_modules
