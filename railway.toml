@@ -1,9 +1,16 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm --prefix backend ci && npm --prefix backend run build"
+# Eliminamos el --prefix porque el Root Directory ya es 'backend'
+# Agregamos la instalación de dependencias de desarrollo para tener el comando 'nest'
+buildCommand = "npm install --include=dev && npm run build"
 
 [deploy]
-startCommand = "npm --prefix backend run start:prod"
+# Comando directo para ejecutar el build de NestJS
+startCommand = "npm run start:prod"
 healthcheckPath = "/api/health"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
+
+[build.nixpacks]
+# Forzamos la versión de Node que tus librerías (AWS, Nest 11) requieren
+nodeVersion = "20"
