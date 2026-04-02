@@ -26,3 +26,4 @@ backend/.env.local
 backend/.env.production
 mobile/env/*.local.json
 mobile/env/*.secret.json
+mobile/env/dart_define.example.json
